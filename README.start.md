@@ -8,8 +8,8 @@ Author: Jędrzej Siewierski
 # Project Structure
 
 Main structure of this repository contains 2 apps:
- - [Frontend](frontend-transacional-managment)
- - [Backend](backend-transactional-managment)
+ - [Frontend](frontend-transactional-management)
+ - [Backend](backend-transactional-management)
 
 
 # Technologies
@@ -45,8 +45,8 @@ Postgres is relational database which allows as keep data in structured way.
 3. Run migration Files for your postgres database
    
   ```
-  cd backend-transactional-managment
-  npm run migrate:run
+  cd backend-transactional-management
+    npm run migration:run
   ```
 4. Run in root dir in separate terminal windows
   ```
