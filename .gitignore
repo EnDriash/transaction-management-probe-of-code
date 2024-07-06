@@ -1,0 +1,10 @@
+node_modules/
+cypress/videos
+cypress/plugins
+cypress/screenshots
+cypress/support
+
+.idea
+
+data/postgres/**/*
+*/**/data/postgres/**/*
