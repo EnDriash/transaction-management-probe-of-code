@@ -136,6 +136,7 @@ describe('Transaction Management Backend - Level 2', () => {
 
 describe('Transaction Management Frontend - Level 2', () => {
   it('The app can submit new transactions and show the historical ones', () => {
+    
     let userAccountSnapshot = {}
     cy.request({
       failOnStatusCode: false,
@@ -145,10 +146,11 @@ describe('Transaction Management Frontend - Level 2', () => {
     .then((response) => {
       userAccountSnapshot = response.body
 
-    cy.visit('/')
+    cy.visit('/', {timeout: 12000})
     // submit a transaction & verify the position on the list
       const amount = 30
       const balance = userAccountSnapshot.balance + amount
+
       cy.get('[data-type=account-id]').type(accountId)
       cy.get('[data-type=amount]').type(amount)
       cy.get('[data-type=transaction-submit]').click()
@@ -157,10 +159,11 @@ describe('Transaction Management Frontend - Level 2', () => {
       // submit a new transaction to the same account and verify the balance
       const newAmount = 7
       const newBalance = balance + newAmount
+
       cy.get('[data-type=account-id]').type(accountId)
       cy.get('[data-type=amount]').type(newAmount)
       cy.get('[data-type=transaction-submit]').click()
-      cy.get(`[data-type=transaction][data-account-id=${accountId}][data-amount=${newAmount}][data-balance=${newBalance}]`).should('exist')
+      cy.get(`[data-type=transaction][data-account-id=${accountId}][data-amount=${newAmount}][data-balance=${newBalance}]`, { timeout: 10000 }).should('exist')
 
       let userAnotherAccountSnapshot = {}
       cy.request({
@@ -170,22 +173,23 @@ describe('Transaction Management Frontend - Level 2', () => {
       })
       .then((response) => {
         userAnotherAccountSnapshot = response.body
-  
         // submit another transaction & verify the position on the list
         const anotherAmount = 7
         const anotherBalance = userAnotherAccountSnapshot.balance + anotherAmount
+
         cy.get('[data-type=account-id]').type(anotherAccountId)
         cy.get('[data-type=amount]').type(anotherAmount)
         cy.get('[data-type=transaction-submit]').click()
-        cy.get(`[data-type=transaction][data-account-id=${anotherAccountId}][data-amount=${anotherAmount}][data-balance=${anotherBalance}]`).should('exist')
+        cy.get(`[data-type=transaction][data-account-id=${anotherAccountId}][data-amount=${anotherAmount}][data-balance=${anotherBalance}]`, { timeout: 10000 }).should('exist')
 
         // // submit a transaction with a negative amount & verify the position on the list
         const negativeAmount = -5
         const negativeBalance = anotherBalance + negativeAmount
+
         cy.get('[data-type=account-id]').type(anotherAccountId)
         cy.get('[data-type=amount]').type(negativeAmount)
         cy.get('[data-type=transaction-submit]').click()
-        cy.get(`[data-type=transaction][data-account-id=${anotherAccountId}][data-amount=${negativeAmount}][data-balance=${negativeBalance}]`).should('exist')
+        cy.get(`[data-type=transaction][data-account-id=${anotherAccountId}][data-amount=${negativeAmount}][data-balance=${negativeBalance}]`, { timeout: 10000 }).should('exist')
       })
     })
   })

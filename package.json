@@ -7,8 +7,8 @@
   "scripts": {
     "build": "echo build your fullstack app here",
     "start": "npm run start:fe && cd ../ && npm run start:be",
-    "start:fe": "cd frontend-transacional-managment && npm run dev",
-    "start:be": "cd backend-transactional-managment && npm run start",
+    "start:fe": "npm run dev --prefix frontend-transactional-management",
+    "start:be": "npm run start --prefix backend-transactional-management ",
     "test": "cypress run"
   },
   "devDependencies": {

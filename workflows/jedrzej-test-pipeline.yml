@@ -1,0 +1,54 @@
+name: Jedrzej test pipeline
+on:
+  push:
+    branches:
+      - '*'
+      - '*/*'
+      - '!master'
+      - '!main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '21'
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npm install --prefix backend-transactional-management
+        npm install --prefix frontend-transactional-management
+
+    - name: Run Database
+      run: |
+        sudo docker compose up -d
+
+    - name: Run migrations
+      run: |
+        cd backend-transactional-management
+        npm run migration:run
+
+    - name: Start BE and FE
+      run: |
+        npm run start --prefix backend-transactional-management &
+        npm run dev --prefix frontend-transactional-management &
+    
+    - name: Run backend tests
+      run: |
+        npm run test --prefix backend-transactional-management
+
+    - name: Run e2e cypress tests
+      run: |
+        npm run test
+
+    - name: Publish test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+
