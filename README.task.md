@@ -387,14 +387,3 @@ Every new transaction goes on **the top of the list** and should have an enclosi
 3. Implement client-side validation of the form data.
 4. Unit test one module of choice. There is no need to test the whole app, as we only want to understand what you consider when writing unit tests.
 5. Avoid duplication and extract reusable modules where it makes sense. We want to see your approach to creating a codebase that is easy to maintain.
-
-<!--TASK_INSTRUCTIONS_END-->
-## When you are done
-
-1. [Create a new Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from the branch where you've committed your solution to the default branch of this repository. **Please do not merge the created Pull Request**.
-2. Go to your application in [Alva Labs](https://app.alvalabs.io) and submit your test.
-
----
-
-Authored by [Alva Labs](https://www.alvalabs.io/).
-
